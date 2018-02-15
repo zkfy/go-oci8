@@ -1043,7 +1043,7 @@ func (s *OCI8Stmt) bind(args []namedValue) ([]oci8bind, error) {
 		var sbind oci8bind
 
 		vv := uv.Value
-		if out, ok := vv.(outValue); ok {
+		if out, ok := handleOutput(vv); ok {
 			sbind.out = out.Dest
 			vv, err = driver.DefaultParameterConverter.ConvertValue(out.Dest)
 			if err != nil {
