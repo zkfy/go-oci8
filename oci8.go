@@ -710,7 +710,6 @@ func (d *OCI8Driver) Open(dsnString string) (connection driver.Conn, err error) 
 	if dsn, err = ParseDSN(dsnString); err != nil {
 		return nil, err
 	}
-
 	conn.operationMode = dsn.operationMode
 
 	if rv := C.WrapOCIEnvCreate(
@@ -875,7 +874,6 @@ func (c *OCI8Conn) Close() error {
 		return nil
 	}
 	c.closed = true
-
 	var err error
 	if useOCISessionBegin {
 		// OCISessionEnd() and OCIServerDetach()
@@ -963,7 +961,6 @@ func (s *OCI8Stmt) Close() error {
 		return nil
 	}
 	s.closed = true
-
 	//runtime.SetFinalizer(s, nil)
 	C.OCIHandleFree(
 		s.s,
